@@ -1,8 +1,9 @@
 import jsPDF from "jspdf";
 import 'jspdf-autotable';
+import { AdminPackage } from "./paquetes/AdminPackage";
+import { UsersPackage } from "./paquetes/UsersPackage";
 
-export const Paquetes = ({ paquetes }) => {
-
+export const Paquetes = ({ paquetes, Login, Entregar, pago }) => {
 
     const generatePDF = (pacId) => {
         const doc = new jsPDF();
@@ -42,38 +43,36 @@ export const Paquetes = ({ paquetes }) => {
         doc.save('ejemplo.pdf');
     };
 
-    return (
 
+    const ValorLogueo = (Login.user && Login.user.length > 0) ? Login.user[0].usuario : '';
+
+    return (
         <div className="container my-2">
             <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Tracking ID</th>
-                        <th scope="col">Peso</th>
-                        <th scope="col">Precio</th>
+                        <th scope="col">Peso(lb)</th>
+                        <th scope="col">Precio($)</th>
                         <th scope="col">Status</th>
+                        {Login.user[0].usuario === 'admin' ? (<th scope="col">Pago</th>):''}
                         <th scope="col">Fecha de Vencimiento</th>
-
                     </tr>
                 </thead>
                 <tbody>
-                    {paquetes.map(pack => (
-                        <tr key={pack.id}>
-                            <th scope="row">{pack.id}</th>
-                            <td>{pack.tracking}</td>
-                            <td>{pack.peso}</td>
-                            <td>${pack.precio}</td>
-                            <td>{pack.status}</td>
-                            <td>{pack.fecha}</td>
-                            <td><button type="button" className="btn btn-primary" onClick={() => generatePDF(pack.id)}>Ver Recibo</button></td>
-                        </tr>
-                    ))}
+                    {Login.user[0].usuario === 'admin' ? (
+                        <AdminPackage Entregar={Entregar} paquetes={paquetes} generatePDF={generatePDF} Login={Login} />
 
 
+                    ) :
+                        <UsersPackage paquetes={paquetes} ValorLogueo={ValorLogueo} pago={pago} generatePDF={generatePDF} Login={Login} />
+
+
+
+                    }
                 </tbody>
             </table>
-
         </div>
     )
 }

@@ -5,7 +5,7 @@ const paqDefault = {
     "tracking": "",
     "peso": "0",
     "precio": "0",
-    "status": "Pendiente",
+    "status": "Pendiente ⬜",
     "fecha": "2 de septiembre del 2024"
 }
 export const Register = ({ addPaquetes }) => {

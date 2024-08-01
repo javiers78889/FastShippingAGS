@@ -5,7 +5,8 @@ export const Paquete = [
         "tracking": "LPAASDSDFFGFJGHJ",
         "peso": "20",
         "precio": "45",
-        "status": "Pendiente",
+        "status": "Pendiente ⬜",
+        "pago": "Pendiente ⬜",
         "fecha": "2 de septiembre del 2024"
 
 
@@ -16,7 +17,8 @@ export const Paquete = [
         "tracking": "PGA12346YHFDSFDSDFS",
         "peso": "100",
         "precio": "250",
-        "status": "Pagado",
+        "status": "Entregado ✅",
+        "pago":"Pagado✅",
         "fecha": "5 de agosto del 2024",
 
     },

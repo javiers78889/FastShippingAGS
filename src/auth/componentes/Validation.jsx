@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { NavBar } from "../../componentes/NavBar";
 import { UserRouter } from "../../routers/UserRouter";
 import { LoginReducer } from "../../auth/reducer/LoginReducer";
@@ -6,28 +6,68 @@ import { LoginReducer } from "../../auth/reducer/LoginReducer";
 import { Login } from "./Login";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Nav } from "./Nav";
+import { Users } from "../services/Users";
+import Swal from 'sweetalert2';
 
-const initialLog = {
-    usuario: undefined,
-    contraseña: undefined,
-    isAuth: false,
+
+
+const initialLog = JSON.parse(sessionStorage.getItem("log")) || {
+    'isAuth': false,
+    "nombre": undefined,
+    'password': undefined,
+    'usuario': undefined,
 };
 
 export const Validation = () => {
     const [loginState, dispatch] = useReducer(LoginReducer, initialLog);
 
-    const logueo = () => {
-        const pase = {
-            usuario: "ags/566",
-            contraseña: "asdasd",
-            isAuth: true,
-        };
-        dispatch({
-            type: 'login',
-            payload: pase,
-        });
+    const [UsuariosExis, SetUsuarioExis] = useState(initialLog);
+    useEffect(() => {
+        SetUsuarioExis(Users)
+    }, [])
+    
+    useEffect(() => {
+        sessionStorage.setItem("log", JSON.stringify(loginState));
+    }, [loginState])
 
-        console.log(loginState);
+
+
+    const logueo = (valor) => {
+
+        const Saludo = valor.usuario;
+
+
+        const VerificaUser = UsuariosExis.filter(u => u.usuario === Saludo);
+        const VerificaSome = UsuariosExis.some(u => u.usuario === Saludo);
+
+
+        if (VerificaSome) {
+
+            dispatch({
+                type: 'login',
+                payload: VerificaUser,
+            });
+
+            Swal.fire({
+                icon: 'success',
+                title: `Bienvenido Señor ${VerificaUser[0].nombre} `,
+                text: 'Un Gusto Verlo Por Aqui!',
+            });
+
+
+
+        }
+
+        else {
+            Swal.fire({
+                icon: "error",
+                title: "Introduzca Una Contrasena Valida",
+                text: "Verifique Los Datos Ingresados",
+            });
+        }
+
+
+
     };
     const logout = () => {
 
@@ -35,20 +75,20 @@ export const Validation = () => {
             type: 'logout',
         });
 
-        console.log(loginState);
+
     };
 
     return (
         <>
             {loginState.isAuth ? (
-                <NavBar logout={logout} />
+                <NavBar Login={loginState} logout={logout} />
             ) : (
                 <Nav />
             )}
 
             <Routes>
                 {loginState.isAuth ? (
-                    <Route path="/*" element={<UserRouter  />} />
+                    <Route path="/*" element={<UserRouter Login={loginState} />} />
                 ) : (
                     <>
                         <Route path="/login" element={<Login Logueo={logueo} />} />
