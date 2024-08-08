@@ -11,6 +11,7 @@ export const Profile = ({ paquetes, Login }) => {
       // Corrige el nombre de la propiedad según tu estructura de datos
       const totalPaquet = paquetes.filter(u => u.usuario === Login.user[0].usuario);
       const totalPaquetes = totalPaquet.length;
+      const cuentaAdmin = paquetes.length
   
     
 
@@ -37,7 +38,14 @@ export const Profile = ({ paquetes, Login }) => {
                         <tr>
                             <th scope="row">{data.usuario}</th>
                             <td>{data.nombre}</td>
-                            <td>{totalPaquetes}</td>
+                            {Login.user[0].usuario === 'admin'? (
+                                <td>{cuentaAdmin}</td>
+
+                            ):(
+                                <td>{totalPaquetes}</td>
+
+                            )}
+                            
                         </tr>
                         {/* Button should be placed outside of the table */}
                     </tbody>

@@ -15,9 +15,17 @@ export const NavBar = ({ logout, Login }) => {
                             <NavLink className="nav-link active" to="profile/paquetes">   {Login.user[0].usuario === 'admin' ? 'Paquetes Registrados' : 'Mis paquetes'}</NavLink>
                         </li>
                         {Login.user[0].usuario === 'admin' ? (
-                            <li className="nav-item">
-                                <NavLink className="nav-link active" to="register">Asignar Paquete</NavLink>
-                            </li>
+                            <>
+
+                                <li className="nav-item">
+                                    <NavLink className="nav-link active" to="register/users">Crear Usuario</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link active" to="register">Asignar Paquete</NavLink>
+                                </li>
+
+
+                            </>
                         ) : (
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Historial de Pagos</a>

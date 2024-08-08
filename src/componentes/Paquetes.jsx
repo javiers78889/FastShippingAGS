@@ -1,78 +1,83 @@
-import jsPDF from "jspdf";
+
 import 'jspdf-autotable';
 import { AdminPackage } from "./paquetes/AdminPackage";
 import { UsersPackage } from "./paquetes/UsersPackage";
 
-export const Paquetes = ({ paquetes, Login, Entregar, pago }) => {
+import { usePDF } from "../hooks/usePDF";
 
-    const generatePDF = (pacId) => {
-        const doc = new jsPDF();
+export const Paquetes = ({ paquetes, Login, Entregar, pago, isLoading }) => {
 
-        // Definir la estructura de la tabla
-        const tableData = paquetes.filter(pack => pack.id === pacId);
-
-        console.log("Paquete seleccionado:");
-        console.log(tableData);  // Aquí debería imprimirse el paquete específico
-
-        const tableColumns = [
-            { header: 'Id', dataKey: 'id' },
-            { header: 'Tracking ID', dataKey: 'tracking' },
-            { header: 'Peso', dataKey: 'peso' },
-            { header: 'Precio $', dataKey: 'precio' },
-            { header: 'Status', dataKey: 'status' },
-            { header: 'Fecha de Vencimiento', dataKey: 'fecha' }
-        ];
-        const pack = tableData[0];
-        doc.text("Facturar a: " + pack.usuario, 10, 10)
-
-        doc.autoTable({
-            head: [tableColumns.map(col => col.header)],
-            body: tableData.map(pack => [
-                pack.id,
-                pack.tracking,
-                pack.peso,
-                pack.precio,
-                pack.status,
-                pack.fecha
-            ]),
-            startY: 30, // Ajusta según sea necesario
-            theme: 'striped',
-        });
-
-        // Guardar el PDF con un nombre específico
-        doc.save('ejemplo.pdf');
-    };
-
+    const generatePDF= usePDF(paquetes);
 
     const ValorLogueo = (Login.user && Login.user.length > 0) ? Login.user[0].usuario : '';
 
     return (
-        <div className="container my-2">
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Tracking ID</th>
-                        <th scope="col">Peso(lb)</th>
-                        <th scope="col">Precio($)</th>
-                        <th scope="col">Status</th>
-                        {Login.user[0].usuario === 'admin' ? (<th scope="col">Pago</th>):''}
-                        <th scope="col">Fecha de Vencimiento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {Login.user[0].usuario === 'admin' ? (
-                        <AdminPackage Entregar={Entregar} paquetes={paquetes} generatePDF={generatePDF} Login={Login} />
+        <>
 
 
-                    ) :
-                        <UsersPackage paquetes={paquetes} ValorLogueo={ValorLogueo} pago={pago} generatePDF={generatePDF} Login={Login} />
+            {isLoading && <div className="alert alert-info">Cargando...</div>}
+
+
+            <div className="container my-2">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Tracking ID</th>
+                            <th scope="col">Peso(lb)</th>
+                            <th scope="col">Precio($)</th>
+                            <th scope="col">Status</th>
+                            {Login.user[0].usuario === 'admin' ? (
+                                <>
+                                    <th scope="col">Pago</th>
+                                    <th scope="col">Fecha de Registro</th>
+                                </>
+                            ) : (
+                                <>
+                                    <th scope="col">Fecha de Registro</th>
+                                    <th scope="col">Pago</th>
+                                </>
+                            )}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {paquetes ? (
+
+
+                            Login.user[0].usuario === 'admin' ? (
+                                paquetes.map(pack => (
+                                    <tr key={pack.id}>
+                                        <AdminPackage Entregar={Entregar} pack={pack} generatePDF={generatePDF} Login={Login} />
+                                    </tr>
+                                ))
+                            ) : (
+                                paquetes.length > 0 ? (
+                                    paquetes.filter(pack => pack.usuario === ValorLogueo).map(pack => (
+                                        <tr key={pack.id}>
+
+                                            <UsersPackage key={pack.id} pack={pack} ValorLogueo={ValorLogueo} pago={pago} generatePDF={generatePDF} Login={Login} />
+
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="7">
+                                            <div className="alert alert-primary my-5" role="alert">
+                                                No hay paquetes registrados
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            )
 
 
 
-                    }
-                </tbody>
-            </table>
-        </div>
-    )
-}
+
+                        ) : (<tr><td><p>Cargando...</p></td></tr>)}
+                    </tbody>
+                </table>
+            </div>
+        </>
+    );
+};
+

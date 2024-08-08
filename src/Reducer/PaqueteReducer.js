@@ -6,25 +6,27 @@ export const PaqueteReducer = (state = [], action) => {
 
             return [...state, action.payload];
 
+        case 'LoadingProduct':
+
+            return action.payload;
+
         case 'DeliveredProduct':
             return state.map((i) => {
                 if (i.id === action.payload.id) { // Cambia `i.product.id` a `i.id`
-                    return {
-                        ...i, // Mantén el resto de las propiedades
-                        status: 'Entregado ✅' , pago: 'Pagado ✅'// Cambia el status a "Entregado"
-                    };
+                    return { ...action.payload };
+                }else{
+
+                    return i;
                 }
-                return i;
             });
         case 'Pago':
             return state.map((i) => {
                 if (i.id === action.payload.id) { // Cambia `i.product.id` a `i.id`
-                    return {
-                        ...i, // Mantén el resto de las propiedades
-                        pago: 'Pagado ✅' // Cambia el status a "Entregado"
-                    };
+                    return { ...action.payload };
+                }else{
+
+                    return i;
                 }
-                return i;
             });
 
         default:

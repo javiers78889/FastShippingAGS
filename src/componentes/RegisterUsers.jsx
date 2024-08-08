@@ -2,19 +2,18 @@ import { useState } from "react";
 
 const paqDefault = {
     "usuario": "",
-    "tracking": "",
-    "peso": "0",
-    "tarifas": "0",
-    "precio": "0",
-    "status": "Pendiente ⬜",
-    "pago": "Pendiente ⬜",
-
+    "contraseña": "",
+    "isAuth": 0,
+    "nombre": "",
+    "plan": "",
+    "telefono": "",
+   
 }
-export const Register = ({ addPaquetes, Login }) => {
+export const RegisterUsers = ({ addUsers, Login }) => {
 
 
     const [paq, setPaq] = useState(paqDefault);
-    const { usuario, tracking, tarifas, peso } = paq;
+    const { usuario, contraseña, nombre, plan, telefono } = paq;
 
 
     const onInputChange = (event) => {
@@ -27,7 +26,7 @@ export const Register = ({ addPaquetes, Login }) => {
     }
     const handlerSubmit = (event) => {
         event.preventDefault();
-        addPaquetes(paq);
+        addUsers(paq);
     }
 
 
@@ -41,16 +40,20 @@ export const Register = ({ addPaquetes, Login }) => {
                         <input type="text" className="form-control" name="usuario" value={usuario} onChange={onInputChange} />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">N°Tracking</label>
-                        <input type="text" className="form-control" name="tracking" value={tracking} onChange={onInputChange} />
+                        <label className="form-label">contraseña</label>
+                        <input type="password" className="form-control" name="contraseña" value={contraseña} onChange={onInputChange} />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label" >Peso/Volumen</label>
-                        <input type="number" className="form-control" name="peso" value={peso} onChange={onInputChange} />
+                        <label className="form-label" >nombre</label>
+                        <input type="text" className="form-control" name="nombre" value={nombre} onChange={onInputChange} />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label" >Tarifa</label>
-                        <input type="number" className="form-control" name="tarifas" value={tarifas} onChange={onInputChange} />
+                        <label className="form-label" >Plan</label>
+                        <input type="text" className="form-control" name="plan" value={plan} onChange={onInputChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" >Telefono</label>
+                        <input type="text" className="form-control" name="telefono" value={telefono} onChange={onInputChange} />
                     </div>
 
                     <button type="submit" className="btn btn-primary form-control">Crear</button>

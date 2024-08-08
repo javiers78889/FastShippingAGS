@@ -1,30 +1,48 @@
-export const Paquete = [
-    {
-        "id": 1,
-        "usuario": "AGS/566",
-        "tracking": "LPAASDSDFFGFJGHJ",
-        "peso": "20",
-        "precio": "45",
-        "status": "Pendiente ⬜",
-        "pago": "Pendiente ⬜",
-        "fecha": "2 de septiembre del 2024"
+import axios from "axios";
 
 
-    },
-    {
-        "id": 2,
-        "usuario": "AGS/566",
-        "tracking": "PGA12346YHFDSFDSDFS",
-        "peso": "100",
-        "precio": "250",
-        "status": "Entregado ✅",
-        "pago":"Pagado✅",
-        "fecha": "5 de agosto del 2024",
+const api = 'http://localhost:4000/paquetes';
 
-    },
+export const findAllPaquetes = async () => {
+    try {
+        const response = await axios.get(api, { timeout: 10000 }); // 10 segundos
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+    return undefined;
+}
 
 
 
+export const registerAllPaquetes = async ({ usuario, tracking, peso, precio, status, pago, telefono, nombre, tarifas }) => {
+
+    try {
+        const posteo = await axios.post(api, { usuario, tracking, peso, precio, status, pago, telefono, nombre, tarifas })
+        return posteo.data;
+
+    } catch (error) {
+        console.log(error);
+    }
+    return undefined;
+
+}
 
 
-];
+export const updatePaquetes = async ({ id, status, pago, }) => {
+
+    try {
+
+        const actualiza = await axios.put(`${api}/${id}`, { status, pago });
+
+        return actualiza.data;
+
+    } catch (error) {
+
+        console.error(error);
+    }
+
+    return undefined;
+
+}
+

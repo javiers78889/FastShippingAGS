@@ -6,7 +6,7 @@ import { LoginReducer } from "../../auth/reducer/LoginReducer";
 import { Login } from "./Login";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Nav } from "./Nav";
-import { Users } from "../services/Users";
+import { findAllUsers,  } from "../services/Users";
 import Swal from 'sweetalert2';
 
 
@@ -23,16 +23,25 @@ export const Validation = () => {
 
     const [UsuariosExis, SetUsuarioExis] = useState(initialLog);
     useEffect(() => {
-        SetUsuarioExis(Users)
+        const axiosData = async () => {
+            const obUsers = await findAllUsers();
+            if (obUsers) {
+                SetUsuarioExis(obUsers)
+            }
+        }
+
+        axiosData();
     }, [])
-    
+
+
+
     useEffect(() => {
         sessionStorage.setItem("log", JSON.stringify(loginState));
     }, [loginState])
 
 
 
-    const logueo = (valor) => {
+    const logueo = async (valor) => {
 
         const Saludo = valor.usuario;
 

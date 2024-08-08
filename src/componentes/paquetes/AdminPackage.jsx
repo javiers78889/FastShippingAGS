@@ -1,9 +1,9 @@
 
 
-export const AdminPackage = ({ paquetes, generatePDF, Entregar }) => {
+export const AdminPackage = ({ pack= [], generatePDF, Entregar }) => {
     return (
-        paquetes.map(pack => (
-            <tr key={pack.id}>
+        
+            <>
                 <th scope="row">{pack.id}</th>
                 <td>{pack.tracking}</td>
                 <td>{pack.peso}</td>
@@ -20,8 +20,8 @@ export const AdminPackage = ({ paquetes, generatePDF, Entregar }) => {
 
                 ) : ''}
                 <td><button type="button" className="btn btn-primary" onClick={() => generatePDF(pack.id)}>Ver Recibo</button></td>
-            </tr>
-        ))
+            </>
+       
 
     )
 }
