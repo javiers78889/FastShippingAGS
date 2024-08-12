@@ -4,15 +4,14 @@ import { Direcciones } from './Direcciones';
 
 export const Profile = ({ paquetes, Login }) => {
 
-
+    const paquetesArray = Array.isArray(paquetes.data) ? paquetes.data : [];
     // Calculate the total number of packages
     // const totalPaquetes = paquetes.length;
     const [data, setData] = useState(Login.user[0])
       // Corrige el nombre de la propiedad según tu estructura de datos
-      const totalPaquet = paquetes.filter(u => u.usuario === Login.user[0].usuario);
+      const totalPaquet = paquetesArray.filter(u => u.usuario === Login.user[0].usuario);
       const totalPaquetes = totalPaquet.length;
-      const cuentaAdmin = paquetes.length
-  
+      const cuentaAdmin = paquetesArray.length
     
 
 

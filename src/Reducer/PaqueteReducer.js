@@ -4,7 +4,7 @@ export const PaqueteReducer = (state = [], action) => {
 
         case 'addProduct':
 
-            return [...state, action.payload];
+            return action.payload;
 
         case 'LoadingProduct':
 

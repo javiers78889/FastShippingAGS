@@ -33,7 +33,7 @@ export const Validation = () => {
         axiosData();
     }, [])
 
-
+    
 
     useEffect(() => {
         sessionStorage.setItem("log", JSON.stringify(loginState));
@@ -47,6 +47,8 @@ export const Validation = () => {
 
 
         const VerificaUser = UsuariosExis.filter(u => u.usuario === Saludo);
+
+        console.log(UsuariosExis)
         const VerificaSome = UsuariosExis.some(u => u.usuario === Saludo);
 
 

@@ -1,11 +1,11 @@
 import axios from "axios";
 
 
-const api = 'http://localhost:4000/paquetes';
+const api = 'https://fastshippingback.onrender.com/paquetes';
 
 export const findAllPaquetes = async () => {
     try {
-        const response = await axios.get(api, { timeout: 10000 }); // 10 segundos
+        const response = await axios.get(api); // 10 segundos
         return response.data;
     } catch (error) {
         console.log(error);

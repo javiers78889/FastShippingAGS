@@ -5,7 +5,8 @@ import { UsersPackage } from "./paquetes/UsersPackage";
 
 import { usePDF } from "../hooks/usePDF";
 
-export const Paquetes = ({ paquetes, Login, Entregar, pago, isLoading }) => {
+export const Paquetes = ({ paquetess, Login, Entregar, pago, isLoading }) => {
+    const paquetes =Array.isArray(paquetess.data) ? paquetess.data : [];
 
     const generatePDF= usePDF(paquetes);
 

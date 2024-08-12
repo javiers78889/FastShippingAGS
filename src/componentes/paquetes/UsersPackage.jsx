@@ -6,7 +6,7 @@ export const UsersPackage = ({ pack = [], ValorLogueo, generatePDF, Login, pago 
 
 
             
-                    <tr key={pack.id}>
+                 
                         <th scope="row">{pack.id}</th>
                         <td>{pack.tracking}</td>
                         <td>{pack.peso}</td>
@@ -23,7 +23,7 @@ export const UsersPackage = ({ pack = [], ValorLogueo, generatePDF, Login, pago 
                         ) : null}
 
                         <td><button type="button" className="btn btn-primary" onClick={() => generatePDF(pack.id)}>Ver Recibo</button></td>
-                    </tr>
+                 
              
 
 
