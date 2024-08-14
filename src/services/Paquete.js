@@ -3,12 +3,13 @@ import axios from "axios";
 
 const api = 'https://fastshippingback.onrender.com/paquetes';
 
+
 export const findAllPaquetes = async () => {
     try {
         const response = await axios.get(api); // 10 segundos
         return response.data;
     } catch (error) {
-        console.log(error);
+        handleError(error)
     }
     return undefined;
 }
@@ -22,7 +23,7 @@ export const registerAllPaquetes = async ({ usuario, tracking, peso, precio, sta
         return posteo.data;
 
     } catch (error) {
-        console.log(error);
+        handleError(error)
     }
     return undefined;
 
@@ -39,10 +40,31 @@ export const updatePaquetes = async ({ id, status, pago, }) => {
 
     } catch (error) {
 
-        console.error(error);
+        handleError(error)
     }
 
     return undefined;
 
 }
 
+
+
+const handleError = (error) => {
+    if (axios.isAxiosError(error)) {
+        // Manejo específico para errores de Axios
+        if (error.response) {
+            // La solicitud fue hecha y el servidor respondió con un código de estado
+            // que está fuera del rango de 2xx
+            console.error(`Error de respuesta (${error.response.status}):`, error.response.data);
+        } else if (error.request) {
+            // La solicitud fue hecha pero no se recibió respuesta
+            console.error('Error de solicitud:', error.request);
+        } else {
+            // Algo ocurrió al configurar la solicitud
+            console.error('Error de configuración:', error.message);
+        }
+    } else {
+        // Errores no relacionados con Axios
+        console.error('Error desconocido:', error);
+    }
+};

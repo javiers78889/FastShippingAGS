@@ -8,10 +8,11 @@ import { findAllPaquetes, registerAllPaquetes, updatePaquetes } from "../service
 import Swal from "sweetalert2";
 import { findAllUsers, registerAllUsers } from "../auth/services/Users";
 import { RegisterUsers } from "../componentes/RegisterUsers";
+import { handlePayment } from "../payment/pago";
+import { validarPago } from "../payment/validarPago";
 
 export const UserRouter = ({ Login }) => {
     const [paquetes, dispatch] = useReducer(PaqueteReducer, []);
-    const [isNewPaqueteAdded, setIsNewPaqueteAdded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ export const UserRouter = ({ Login }) => {
 
     useEffect(() => {
         fetchPaquetes();
-    }, [isNewPaqueteAdded]);
+    }, []);
 
     const addPaquetes = async (obj) => {
         const precio = obj.peso * obj.tarifas;
@@ -55,24 +56,18 @@ export const UserRouter = ({ Login }) => {
         const nombre = filtro[0].nombre;
         const nuevoPaquete = { ...obj, precio, telefono, nombre, tarifas };
 
-        const posteo = await registerAllPaquetes(nuevoPaquete);
-
+        await registerAllPaquetes(nuevoPaquete);
 
         Swal.fire({
             title: "Paquete Registrado!",
             text: "Presione Ok para continuar!",
             icon: "success"
         });
-        dispatch({
-            type: 'addProduct',
-            payload: posteo,
-        });
-        
-        setIsNewPaqueteAdded(prev => !prev);
-        
-        navigate('profile/paquetes');
-      
 
+        // Refresca la lista de paquetes después de agregar uno nuevo
+        fetchPaquetes();
+
+        navigate('profile/paquetes');
     };
 
     const addUsers = async (obj) => {
@@ -91,7 +86,7 @@ export const UserRouter = ({ Login }) => {
     };
 
     const Entregar = async (productId) => {
-        const paqu =Array.isArray(paquetes.data) ? paquetes.data : [];
+        const paqu = Array.isArray(paquetes.data) ? paquetes.data : [];
         const filtrado = paqu.find(pack => pack.id === productId);
         console.log(filtrado)
         const status = 'Entregado ✅';
@@ -100,54 +95,44 @@ export const UserRouter = ({ Login }) => {
         if (filtrado) {
             const { id } = filtrado;
 
-            
-            setIsNewPaqueteAdded(prev => !prev);
             navigate('profile/paquetes');
             Swal.fire({
                 title: "Paquete Entregado!",
                 text: "Presione 'OK', Para Continuar",
                 icon: "success"
             });
-       
-                const actualizar = await updatePaquetes({ id, pago, status });
-                dispatch({
-                    type: 'DeliveredProduct',
-                    payload: actualizar
-                });
-                
+
+            const actualizar = await updatePaquetes({ id, pago, status });
+            dispatch({
+                type: 'DeliveredProduct',
+                payload: actualizar
+            });
+
         }
-        
+
     };
-    
+
     const pagarPaquete = async (pagos) => {
-        const filtraPago = paquetes.find(pack => pack.id === pagos);
+        // Accede a la propiedad correcta del objeto JSON
+        const paqu = Array.isArray(paquetes.data) ? paquetes.data : [];
+        const filtraPago = paqu.find(pack => pack.id === pagos);
         const pago = 'Pagado ✅';
+        //PAGO
 
-        if (filtraPago) {
-            const { status, id } = filtraPago;
 
-            try {
-                const actualizar = await updatePaquetes({ id, pago, status });
-                dispatch({
-                    type: 'Pago',
-                    payload: actualizar,
-                });
+        const pagando = handlePayment(filtraPago.precio, filtraPago.tracking, filtraPago.id); // Llama a la función para manejar el pago
+        console.log(pagando.data)
 
-                Swal.fire({
-                    title: "Paquete Pagado Con Éxito!",
-                    text: "Presione 'OK', Para Continuar!",
-                    icon: "success"
-                });
-            } catch (error) {
-                console.error("Error al actualizar el estado de pago:", error);
-                Swal.fire({
-                    title: "Error",
-                    text: "No se pudo actualizar el estado de pago.",
-                    icon: "error"
-                });
-            }
+        if (pagando) {
+
+            validarPago()
         }
+
+
+
+
     };
+
 
     return (
         <>

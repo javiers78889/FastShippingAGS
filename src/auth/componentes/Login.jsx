@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import fastShippingImg from '../../img/FAST_SHIPPING_AGS.png';
+import '../../estilos/app.css'
 const initalUserValid = {
     'usuario': '',
     'password': '',
@@ -25,8 +26,8 @@ export const Login = ({ Logueo }) => {
     return (
         <>
 
-            <div className="form-container form-overlay w-60 d-flex align-items-center justify-content-center my-5 ">
-                <form className="w-50 shadow-lg p-4 bg-white rounded" onSubmit={submit}>
+            <div className="form-container form-overlay w-60 d-flex align-items-center justify-content-center container centrar ">
+                <form className="w-50 shadow-lg  p-4 bg-white rounded my-5"  onSubmit={submit}>
                     <div className="d-flex justify-content-center align-items-center mb-3">
                         <img className="img-fluid " src={fastShippingImg} width={100} height={100} alt="Foto de perfil" />
                     </div>

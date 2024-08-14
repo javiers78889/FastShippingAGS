@@ -44,13 +44,12 @@ export const Validation = () => {
     const logueo = async (valor) => {
 
         const Saludo = valor.usuario;
-
-
+        const contra= valor.password;
+        
+        
         const VerificaUser = UsuariosExis.filter(u => u.usuario === Saludo);
-
-        console.log(UsuariosExis)
-        const VerificaSome = UsuariosExis.some(u => u.usuario === Saludo);
-
+        const VerificaSome = UsuariosExis.some(u => u.usuario === Saludo && u.contraseña === contra);
+        
 
         if (VerificaSome) {
 
@@ -72,7 +71,7 @@ export const Validation = () => {
         else {
             Swal.fire({
                 icon: "error",
-                title: "Introduzca Una Contrasena Valida",
+                title: "Introduzca Una Contraseña Valida",
                 text: "Verifique Los Datos Ingresados",
             });
         }

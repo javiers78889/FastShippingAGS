@@ -1,0 +1,12 @@
+#root {
+    background-image: url('../img/background-fast.png');
+    background-size: 100%;
+    background-position: top;
+    height: 100vh; /* O la altura que desees */
+    width: 100%;
+  }
+
+
+  .centrar{
+    margin-top: 10rem;
+  }

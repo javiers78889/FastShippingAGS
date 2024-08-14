@@ -32,11 +32,14 @@ export const Paquetes = ({ paquetess, Login, Entregar, pago, isLoading }) => {
                                 <>
                                     <th scope="col">Pago</th>
                                     <th scope="col">Fecha de Registro</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </>
                             ) : (
                                 <>
                                     <th scope="col">Fecha de Registro</th>
                                     <th scope="col">Pago</th>
+                                    <th scope="col"></th>
                                 </>
                             )}
                         </tr>

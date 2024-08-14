@@ -27,9 +27,8 @@ export const NavBar = ({ logout, Login }) => {
 
                             </>
                         ) : (
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Historial de Pagos</a>
-                            </li>
+                            <>
+                            </>
                         )}
                     </ul>
                     <ul className="navbar-nav">
