@@ -88,29 +88,39 @@ export const UserRouter = ({ Login }) => {
     const Entregar = async (productId) => {
         const paqu = Array.isArray(paquetes.data) ? paquetes.data : [];
         const filtrado = paqu.find(pack => pack.id === productId);
-        console.log(filtrado)
+    
+        if (!filtrado) {
+            console.error("No se encontró el paquete con el id:", productId);
+            return;
+        }
+    
+        console.log(filtrado); // Asegúrate de que esto sea un objeto válido
+    
         const status = 'Entregado ✅';
         const pago = 'Pagado ✅';
-
-        if (filtrado) {
-            const { id } = filtrado;
-
-            navigate('profile/paquetes');
+    
+        const { id } = filtrado;
+    
+        try {
+            const actualizar = await updatePaquetes({ id, pago, status });
             Swal.fire({
                 title: "Paquete Entregado!",
                 text: "Presione 'OK', Para Continuar",
                 icon: "success"
             });
-
-            const actualizar = await updatePaquetes({ id, pago, status });
+            
             dispatch({
                 type: 'DeliveredProduct',
                 payload: actualizar
             });
-
+        } catch (error) {
+            console.error("Error al entregar el paquete:", error);
         }
-
+         // Refresca la lista de paquetes después de agregar uno nuevo
+        fetchPaquetes();
+        navigate('profile/paquetes');
     };
+    
 
     const pagarPaquete = async (pagos) => {
         // Accede a la propiedad correcta del objeto JSON

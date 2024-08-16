@@ -10,15 +10,14 @@ export const PaqueteReducer = (state = [], action) => {
 
             return action.payload;
 
-        case 'DeliveredProduct':
-            return state.map((i) => {
-                if (i.id === action.payload.id) { // Cambia `i.product.id` a `i.id`
-                    return { ...action.payload };
-                }else{
-
-                    return i;
-                }
-            });
+            case 'DeliveredProduct':
+                return Array.isArray(state) ? state.map((i) => {
+                    if (i.id === action.payload.id) {
+                        return { ...action.payload };
+                    } else {
+                        return i;
+                    }
+                }) : state;
         case 'Pago':
             return state.map((i) => {
                 if (i.id === action.payload.id) { // Cambia `i.product.id` a `i.id`
