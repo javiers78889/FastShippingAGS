@@ -4,7 +4,6 @@ const paqDefault = {
     "usuario": "",
     "tracking": "",
     "peso": "0",
-    "tarifas": "0",
     "precio": "0",
     "status": "Pendiente ⬜",
     "pago": "Pendiente ⬜",
@@ -14,7 +13,7 @@ export const Register = ({ addPaquetes, Login }) => {
 
 
     const [paq, setPaq] = useState(paqDefault);
-    const { usuario, tracking, tarifas, peso } = paq;
+    const { usuario, tracking, peso } = paq;
 
 
     const onInputChange = (event) => {
@@ -48,10 +47,7 @@ export const Register = ({ addPaquetes, Login }) => {
                         <label className="form-label" >Peso/Volumen</label>
                         <input type="number" className="form-control" name="peso" value={peso} onChange={onInputChange} />
                     </div>
-                    <div className="mb-3">
-                        <label className="form-label" >Tarifa</label>
-                        <input type="number" className="form-control" name="tarifas" value={tarifas} onChange={onInputChange} />
-                    </div>
+                   
 
                     <button type="submit" className="btn btn-primary form-control">Crear</button>
                 </form>

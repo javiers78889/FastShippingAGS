@@ -4,7 +4,7 @@ export const handlePayment = async (pago, tracking, id) => {
     const cclw = '772036B56D042E80648CBE6943A41ECF8C2C3C16D4E9641C545EFA93B6C959F295A48CCCF2E90946447B39F55D4CA96DE6B4A0A6B74B6B2FC0ECCC1D7570E967';
     const amount = pago; // Usa el monto de los pagos si es necesario
     const description = tracking; // Actualiza la descripción si es necesario
-    const returnUrl = 'http://localhost:5173'; // URL de retorno
+    const returnUrl = 'https://fastshippingags.onrender.com'; // URL de retorno
     const parm1 = id;
 
     // Convierte JSON a hexadecimal

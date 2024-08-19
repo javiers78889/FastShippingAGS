@@ -8,6 +8,7 @@ export const usePDF = (paquetes) => {
 
         // Definir la estructura de la tabla
         const tableData = paquetes.filter(pack => pack.id === pacId);
+        console.log(tableData)
 
         if (tableData.length === 0) {
             console.log("No se encontró el paquete con el id: ", pacId);
@@ -67,7 +68,7 @@ export const usePDF = (paquetes) => {
         // Tabla
         doc.autoTable({
             startY: 80,
-            head: [['CANT.', 'DESCRIPCIÓN', 'PRECIO UNITARIO', 'IMPORTE']],
+            head: [['LIBRAS.', 'DESCRIPCIÓN', 'PRECIO UNITARIO', 'IMPORTE']],
             body: tableData.map(pack => [
                 pack.peso, // Cantidad
                 pack.tracking, // Descripción

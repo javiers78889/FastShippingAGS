@@ -20,10 +20,10 @@ export const findAllUsers = async () => {
 }
 
 
-export const registerAllUsers = async ({ usuario, contraseña, isAuth, nombre, plan, telefono }) => {
+export const registerAllUsers = async ({ usuario, contraseña, isAuth, nombre, plan, telefono,fechaNacimiento,correo }) => {
 
     try {
-        const posteo = await axios.post(api, { usuario, contraseña, isAuth, nombre, plan, telefono })
+        const posteo = await axios.post(api, { usuario, contraseña, isAuth, nombre, plan, telefono,fechaNacimiento,correo })
         return posteo.data;
 
     } catch (error) {

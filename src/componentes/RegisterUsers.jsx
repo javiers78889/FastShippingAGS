@@ -7,12 +7,14 @@ const paqDefault = {
     "nombre": "",
     "plan": "",
     "telefono": "",
+    "correo": "",
+    "fechaNacimiento": "fecha"
 }
 
 export const RegisterUsers = ({ addUsers, Login }) => {
     const [paq, setPaq] = useState(paqDefault);
 
-    const { usuario, contraseña, nombre, telefono,plan } = paq;
+    const { usuario, contraseña, nombre, telefono, plan, correo,fechaNacimiento } = paq;
 
     const onInputChange = (event) => {
         const { name, value } = event.target;
@@ -42,7 +44,7 @@ export const RegisterUsers = ({ addUsers, Login }) => {
                     <input type="text" className="form-control" name="nombre" value={nombre} onChange={onInputChange} />
                 </div>
                 <div className="mb-3">
-                    <label className="form-label" htmlFor="options">Elige una opción</label>
+                    <label className="form-label" htmlFor="options">Plan</label>
                     <select
                         id="options"
                         className="form-select"
@@ -50,14 +52,23 @@ export const RegisterUsers = ({ addUsers, Login }) => {
                         value={plan}
                         onChange={onInputChange}
                     >
-                        <option value="">Selecciona...</option>
-                        <option value="peso">Peso</option>
-                        <option value="volumen">Volumen</option>
+                        <option value="">Selecciona un Plan...</option>
+                        <option value="Plan Standar">Plan Standar</option>
+                        <option value="Plan Emprendedor">Plan Emprendedor</option>
+                        <option value="Plan Delivery">Plan Delivery</option>
                     </select>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Teléfono</label>
                     <input type="text" className="form-control" name="telefono" value={telefono} onChange={onInputChange} />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Correo</label>
+                    <input type="email" className="form-control" name="correo" value={correo} onChange={onInputChange} />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Fecha De Nacimiento</label>
+                    <input type="date" className="form-control" name="fechaNacimiento" value={fechaNacimiento} onChange={onInputChange} />
                 </div>
 
                 <button type="submit" className="btn btn-primary form-control">Crear</button>
