@@ -55,8 +55,8 @@ export const Profile = ({ paquetes, Login }) => {
                         {/* Button should be placed outside of the table */}
                     </tbody>
                 </table>
-                <Direcciones />
-
+                <Direcciones Login={Login} />
+            
             </div>
 
         </>
