@@ -37,7 +37,7 @@ export const useRestApi = () => {
     const addPaquetes = async (obj) => {
 
 
-        
+
 
         const usuarie = await findAllUsers();
         let precio = 0
@@ -54,18 +54,18 @@ export const useRestApi = () => {
         }
         if (filtro[0].plan === 'Plan Emprendedor') {
             tarifas = 2.60
-            precio = obj.peso * tarifas;
+            precio = (obj.peso * tarifas).toFixed(2);
         } else if (filtro[0].plan === 'Plan Standar') {
             if (obj.peso === '1') {
                 tarifas = 3
-                precio = obj.peso * tarifas;
+                precio = (obj.peso * tarifas).toFixed(2);
             } else if (obj.peso > '1') {
                 tarifas = 2.75
-                precio = obj.peso * tarifas;
+                precio = (obj.peso * tarifas).toFixed(2);
             }
         } else if (filtro[0].plan === 'Plan Delivery') {
             tarifas = 3.25;
-            precio = obj.peso * tarifas;
+            precio = (obj.peso * tarifas).toFixed(2);
 
         }
         const telefono = filtro[0].telefono;
