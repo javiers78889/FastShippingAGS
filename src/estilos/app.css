@@ -60,6 +60,9 @@
 .margenLog{
     margin-top: 13rem;
 }
+.margenForm{
+    margin-top: 13rem;
+}
 .margenb{
     margin-top: 2rem;
 }
@@ -75,32 +78,7 @@
     .margenLog{
         margin-top: 0;
     }
-    .Logo {
-        background-image: url('../img/background_oficial_resized.jpeg');
-        background-size: cover;
-        background-position: center;
-
-        height: 100%;
-        width: 100%;
-        background-repeat: no-repeat;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 7rem; 
-
-
-    }
-
-    .Logop {
-        background-image: url('../img/background_oficial_resized.jpeg');
-        background-size: cover;
-        background-position: center;
-        height: 100%;
-        width: 100%;
-        padding: 1rem; 
-       
-
-    }
+   
     .carta {
         
         height: 24rem;

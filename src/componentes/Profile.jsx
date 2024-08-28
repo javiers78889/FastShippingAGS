@@ -18,7 +18,7 @@ export const Profile = ({ paquetes, Login }) => {
 
 
     return (
-        <div className='Logop '>
+        
             <div className="d-flex align-items-center shadow-lg justify-content-center container rounded flex-column bg-white margenb ">
                 <div className=" d-flex align-items-center  justify-content-center  ">
                     <img className=" img-fluid  " src={fastShippingImg} width={200} height={200} alt="Foto de perfil" />
@@ -59,6 +59,6 @@ export const Profile = ({ paquetes, Login }) => {
             
             </div>
 
-        </div>
+      
     );
 }
