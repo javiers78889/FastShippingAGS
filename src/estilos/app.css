@@ -1,20 +1,24 @@
 #root {
-    background-image: url('../img/background-fast.png');
+    background-image: url('../img/background_oficial_resized.jpeg');
     background-size: 100%;
-    background-position: top;
-    height: 100vh; /* O la altura que desees */
+    background-position: center;
+    height: 100vh;
     width: 100%;
-  }
+  
+
+}
 
 
-  .centrar{
-    margin-top: 10rem;
-  }
 
-  .carta-container {
+
+.centrar {
+    margin-top: 3rem;
+}
+
+.carta-container {
     perspective: 1000px;
     position: relative;
-    height: 27em;
+    height: 27rem;
     border-radius: 20rem;
 }
 
@@ -24,17 +28,21 @@
     height: 25rem;
     backface-visibility: hidden;
     transition: transform 0.6s;
-   
+
 }
 
 .front {
-    background-color: white; /* Color de fondo blanco */
-    color: black; /* Color del texto */
+    background-color: white;
+    /* Color de fondo blanco */
+    color: black;
+    /* Color del texto */
 }
 
 .back {
-    background-color: lightgrey; /* Color de fondo gris claro */
-    color: black; /* Color del texto */
+    background-color: lightgrey;
+    /* Color de fondo gris claro */
+    color: black;
+    /* Color del texto */
     transform: rotateY(180deg);
 }
 
@@ -44,4 +52,61 @@
 
 .carta-container.flipped .back {
     transform: rotateY(0);
+}
+.margen{
+    margin-top: 5rem;
+}
+
+.margenLog{
+    margin-top: 13rem;
+}
+.margenb{
+    margin-top: 2rem;
+}
+
+@media (max-width: 1366px) and (max-height: 768px) {
+   
+      .margen{
+        margin-top: 1rem;
+    }
+    .margenb{
+        margin-top: 0;
+    }
+    .margenLog{
+        margin-top: 0;
+    }
+    .Logo {
+        background-image: url('../img/background_oficial_resized.jpeg');
+        background-size: cover;
+        background-position: center;
+
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 7rem; 
+
+
+    }
+
+    .Logop {
+        background-image: url('../img/background_oficial_resized.jpeg');
+        background-size: cover;
+        background-position: center;
+        height: 100%;
+        width: 100%;
+        padding: 1rem; 
+       
+
+    }
+    .carta {
+        
+        height: 24rem;
+       
+    
+    }
+
+
 }

@@ -12,8 +12,10 @@ export const Paquetes = ({ paquetess, Login, Entregar, pago, isLoading }) => {
 
     const ValorLogueo = (Login.user && Login.user.length > 0) ? Login.user[0].usuario : '';
 
+   
+
     return (
-        <>
+        <div  className='Logop'>
 
 
             {isLoading && <div className="alert alert-info">Cargando...</div>}
@@ -81,7 +83,7 @@ export const Paquetes = ({ paquetess, Login, Entregar, pago, isLoading }) => {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     );
 };
 

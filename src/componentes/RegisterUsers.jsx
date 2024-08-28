@@ -29,7 +29,7 @@ export const RegisterUsers = ({ addUsers, Login }) => {
     }
 
     return (
-        <div className="form-container form-overlay w-80 d-flex justify-content-center my-5">
+        <div className="form-container form-overlay w-80 d-flex justify-content-center  Logo">
             <form className="w-50 shadow-lg p-4 bg-white rounded" onSubmit={handlerSubmit}>
                 <div className="mb-3">
                     <label className="form-label">Usuario</label>

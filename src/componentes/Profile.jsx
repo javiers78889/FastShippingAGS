@@ -18,12 +18,12 @@ export const Profile = ({ paquetes, Login }) => {
 
 
     return (
-        <>
-            <div className="d-flex align-items-center justify-content-center container flex-column bg-white my-5">
-                <div className=" d-flex align-items-center justify-content-center  ">
+        <div className='Logop '>
+            <div className="d-flex align-items-center shadow-lg justify-content-center container rounded flex-column bg-white margenb ">
+                <div className=" d-flex align-items-center  justify-content-center  ">
                     <img className=" img-fluid  " src={fastShippingImg} width={200} height={200} alt="Foto de perfil" />
                 </div>
-                <table className="table my-5">
+                <table className="table margen">
                     <thead>
                         <tr>
                             <th scope="col">Usuario</th>
@@ -59,6 +59,6 @@ export const Profile = ({ paquetes, Login }) => {
             
             </div>
 
-        </>
+        </div>
     );
 }

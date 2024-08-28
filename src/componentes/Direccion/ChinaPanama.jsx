@@ -20,7 +20,6 @@ export const ChinaPanama = ({ flipped, Login, handleFlip }) => {
                 <div className="card carta back">
 
                     <div className="card-body d-flex justify-content-center flex-column">
-                        <h5 className="card-title text-center"><strong>Direccion China-Panama</strong></h5>
                         <p className="card-text">
                             <strong>Nombre:</strong> {Login.user[0].nombre} AGS PTY<br />
                             <strong>Dirección:</strong> Lane 1, Jiuzhuang, Seventeenth Team, Hongqun Village, Huashan Town, Huadu

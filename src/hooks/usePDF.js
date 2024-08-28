@@ -42,7 +42,7 @@ export const usePDF = (paquetes) => {
         // Título del documento
         doc.setFont("helvetica", "bold");
         doc.setFontSize(10);
-        doc.text("N° DE FACTURA FS-29368", 10, 10);
+        doc.text(`N° DE FACTURA FS-${filtrado[0].id}`, 10, 10);
 
         doc.text(`FECHA ${fechaFormateada}`, 70, 10);
         doc.addImage(fastShippingImg, 'PNG', 165, 10, 20, 15);

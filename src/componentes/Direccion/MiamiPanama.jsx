@@ -35,7 +35,7 @@ export const MiamiPanama = ({ flipped, Login, handleFlip }) => {
                         <>
 
 
-                            <h5 className="text-center"><strong>Direccion Normal</strong></h5>
+                            <h5 className="text-center"><strong>Direccion Comercial</strong></h5>
                             <p className="card-text">
                                 <strong>Nombre:</strong> {Login.user[0].usuario}<br />
                                 <strong>Apellido:</strong> {Login.user[0].nombre}<br />
@@ -55,7 +55,7 @@ export const MiamiPanama = ({ flipped, Login, handleFlip }) => {
 
                     ) : (
                         <>
-                            <h5 className="text-center"><strong>Direccion Alterna</strong></h5>
+                            <h5 className="text-center"><strong>Direccion Residencial</strong></h5>
                             <p className="card-text">
                                 <strong>Nombre:</strong> {Login.user[0].usuario}<br />
                                 <strong>Apellido:</strong> {Login.user[0].nombre}<br />
@@ -72,8 +72,8 @@ export const MiamiPanama = ({ flipped, Login, handleFlip }) => {
                     )}
 
                     {alterna ? (
-                        <button className="btn btn-warning" onClick={alternar}>Direccion Alterna</button>) :
-                        (<button className="btn btn-success" onClick={alternar}>Direccion Normal</button>)}
+                        <button className="btn btn-warning" onClick={alternar}>Direccion Comercial</button>) :
+                        (<button className="btn btn-success" onClick={alternar}>Direccion Residencial</button>)}
                     <button className="btn btn-secondary my-1" onClick={() => handleFlip('aerea')}>Volver</button>
                 </div>
             </div>
