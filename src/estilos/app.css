@@ -1,12 +1,16 @@
 #root {
     background-image: url('../img/background_oficial_resized.jpeg');
-    background-size: 100%;
-    background-position: center;
-    height: 115vh;
+    background-position: top center;
+    background-size: 100%; /* Asegura que la imagen cubra todo el contenedor sin distorsión */
+    background-position-y:3rem ;
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    height: 100vh; /* Ajusta la altura al tamaño de la ventana del navegador */
     width: 100%;
-  
-
+   
+    backdrop-filter: blur(10px);
+    
 }
+
 .loading-container {
     display: flex;
     flex-direction: column;
