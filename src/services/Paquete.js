@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const api = 'https://fastshippingback.onrender.com/paquetes';
+const api = 'https://fastshippingback-t6ub.onrender.com/paquetes';
 
 
 export const findAllPaquetes = async () => {
